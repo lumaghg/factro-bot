@@ -107,7 +107,9 @@ func main() {
 		return
 	}
 
-	req, err = http.NewRequest("POST", "https://cloud.factro.com/api/core/tasks/tasks", bytes.NewBuffer(reqBody))
+	fmt.Println(string(reqBody))
+
+	req, err = http.NewRequest("PUT", "https://cloud.factro.com/api/core/tasks/tasks", bytes.NewBuffer(reqBody))
 	if err != nil {
 		fmt.Println(err)
 		time.Sleep(10 * time.Minute)
