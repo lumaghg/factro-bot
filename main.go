@@ -56,7 +56,6 @@ func main() {
 		return
 	}
 	req.Header.Add("accept", "application/json")
-	fmt.Println(getJWT)
 	req.Header.Add("Authorization", getJWT)
 	response, err := client.Do(req)
 	if err != nil {
@@ -107,8 +106,6 @@ func main() {
 		return
 	}
 
-	fmt.Println(string(reqBody))
-
 	req, err = http.NewRequest("PUT", "https://cloud.factro.com/api/core/tasks/tasks", bytes.NewBuffer(reqBody))
 	if err != nil {
 		fmt.Println(err)
@@ -119,21 +116,13 @@ func main() {
 	req.Header.Add("Authorization", postJWT)
 	req.Header.Add("Content-Type", "application/json")
 
-	response, err = client.Do(req)
+	_, err = client.Do(req)
 	if err != nil {
 		fmt.Println(err)
 		time.Sleep(10 * time.Minute)
 		return
 	}
 
-	responseBody, err = io.ReadAll(response.Body)
-	if err != nil {
-		fmt.Println(err)
-		time.Sleep(10 * time.Minute)
-		return
-	}
-
-	fmt.Printf("Server responded: %v\n", string(responseBody))
 	fmt.Println("Tasks wurden erfolgreich aktualisiert!")
 	time.Sleep(10 * time.Minute)
 }
