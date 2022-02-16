@@ -17,31 +17,31 @@ func main() {
 	fmt.Println("Factro Task Replacer v1")
 
 	//get console inputs
-	fmt.Println("Mit welchem JWT sollen Aufgaben gelesen werden?")
+	fmt.Println("Mit welchem JWT (Token API Nutzer) sollen Aufgaben gelesen werden?")
 	fmt.Print("-> ")
 	getJWT, _ := reader.ReadString('\n')
 	// clean console input from returns and newlines
 	getJWT = strings.Replace(getJWT, "\r\n", "", -1)
 
-	fmt.Println("Mit welchem JWT sollen Aufgaben geupdated werden?")
+	fmt.Println("Mit welchem JWT (Token API Admin) sollen Aufgaben geupdated werden?")
 	fmt.Print("-> ")
 	postJWT, _ := reader.ReadString('\n')
 	// clean console input from returns and newlines
 	postJWT = strings.Replace(postJWT, "\r\n", "", -1)
 
-	fmt.Println("Welches Feld soll ersetzt werden?")
+	fmt.Println("Welches Feld soll ersetzt werden? (Um den Titel zu ändern, hier title eingeben)")
 	fmt.Print("-> ")
 	fieldToReplace, _ := reader.ReadString('\n')
 	// clean console input from returns and newlines
 	fieldToReplace = strings.Replace(fieldToReplace, "\r\n", "", -1)
 
-	fmt.Println("Welcher Wert soll ersetzt werden?")
+	fmt.Println("Welcher Wert soll ersetzt werden? (Beispiel: Kursnummer = MM.YYYY)")
 	fmt.Print("-> ")
 	valueToFind, _ := reader.ReadString('\n')
 	// clean console input from returns and newlines
 	valueToFind = strings.Replace(valueToFind, "\r\n", "", -1)
 
-	fmt.Println("Durch welchen Wert soll ersetzt werden?")
+	fmt.Println("Durch welchen Wert soll ersetzt werden? (Beispiel: Kursnummer = MM.YYYY)")
 	fmt.Print("-> ")
 	valueToInsert, _ := reader.ReadString('\n')
 	// clean console input from returns and newlines
@@ -123,6 +123,6 @@ func main() {
 		return
 	}
 
-	fmt.Println("Tasks wurden erfolgreich aktualisiert!")
+	fmt.Println("Tasks wurden erfolgreich aktualisiert! Ansicht in Factro aktualisieren und überprüfen.")
 	time.Sleep(10 * time.Minute)
 }
