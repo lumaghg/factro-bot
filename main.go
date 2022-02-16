@@ -66,7 +66,7 @@ func main() {
 	}
 
 	defer response.Body.Close()
-	reponseBody, err := io.ReadAll(response.Body)
+	responseBody, err := io.ReadAll(response.Body)
 	if err != nil {
 		fmt.Println(err)
 		time.Sleep(10 * time.Minute)
@@ -75,7 +75,7 @@ func main() {
 
 	var tasks []map[string]interface{}
 
-	err = json.Unmarshal(reponseBody, &tasks)
+	err = json.Unmarshal(responseBody, &tasks)
 	if err != nil {
 		fmt.Println(err)
 		time.Sleep(10 * time.Minute)
@@ -97,6 +97,8 @@ func main() {
 		}
 	}
 
+	fmt.Printf("new tasks: %v\n", tasks)
+
 	//update tasks in factro
 	reqBody, err := json.Marshal(tasks)
 	if err != nil {
@@ -115,13 +117,21 @@ func main() {
 	req.Header.Add("Authorization", postJWT)
 	req.Header.Add("Content-Type", "application/json")
 
-	_, err = client.Do(req)
+	response, err = client.Do(req)
 	if err != nil {
 		fmt.Println(err)
 		time.Sleep(10 * time.Minute)
 		return
 	}
 
+	responseBody, err = io.ReadAll(response.Body)
+	if err != nil {
+		fmt.Println(err)
+		time.Sleep(10 * time.Minute)
+		return
+	}
+
+	fmt.Printf("Server responded: %v\n", string(responseBody))
 	fmt.Println("Tasks wurden erfolgreich aktualisiert!")
 	time.Sleep(10 * time.Minute)
 }
