@@ -32,7 +32,13 @@ func main() {
 		firstIteration = false
 
 		//get testuser api token from file
-		filePath := path.Join("config", "api_user_token.txt")
+		curDir, err := os.Getwd()
+		if err != nil {
+			fmt.Println(err)
+			time.Sleep(10 * time.Minute)
+			return
+		}
+		filePath := path.Join(curDir, "config", "api_user_token.txt")
 		fileContent, err := ioutil.ReadFile(filePath)
 		if err != nil {
 			fmt.Println(err)
