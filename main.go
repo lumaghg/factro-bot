@@ -167,7 +167,6 @@ func main() {
 		}
 
 		fmt.Println("Tasks wurden erfolgreich aktualisiert! Ansicht in Factro aktualisieren und überprüfen.")
-		time.Sleep(10 * time.Minute)
 
 	}
 }
