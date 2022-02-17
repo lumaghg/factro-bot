@@ -6,7 +6,7 @@ Das Programm ist in der Lage, mehrere "Tasks" in Factro gleichzeitig zu aktualis
 ## Wie benutze ich das Programm?
 1. factro-task-replacer.exe herunterladen und in ein Verzeichnis speichern.
 2. Im selben Verzeichnis einen Ordner mit dem Namen "config" erstellen.
-3. Im Ordner "config" eine Datei mit dem Namen "api_user_token_.txt" erstellen.
+3. Im Ordner "config" eine Datei mit dem Namen "api_user_token.txt" erstellen.
 4. In diese Textdatei den API-Token (JWT) des Nutzers kopieren, für den die Tasks aktualisiert werden sollen. Dabei sollte ein Testnutzer verwendet werden, dem nur das Projekt zugeordnet ist, dessen Tasks aktualisiert werden sollen. Das API Token lässt sich in Factro generieren.
 5. Die Textdatei abspeichern. 
 6. "factro-task-replacer.exe" durch Doppelklicken ausführen.
