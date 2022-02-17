@@ -48,6 +48,7 @@ func main() {
 		}
 		getJWT := string(fileContent)
 		getJWT = strings.Replace(getJWT, "\n", "", -1)
+		getJWT = strings.Replace(getJWT, "\r", "", -1)
 		fmt.Println("API Token used: ", getJWT)
 
 		fmt.Println("Mit welchem JWT (Token API Admin) sollen Aufgaben geupdated werden?")
