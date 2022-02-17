@@ -9,7 +9,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
-	"path"
+	"path/filepath"
 	"strings"
 	"time"
 )
@@ -38,7 +38,7 @@ func main() {
 			time.Sleep(10 * time.Minute)
 			return
 		}
-		filePath := path.Join(curDir, "config", "api_user_token.txt")
+		filePath := filepath.Join(curDir, "config", "api_user_token.txt")
 		fmt.Println("Using filepath: ", filePath)
 		fileContent, err := ioutil.ReadFile(filePath)
 		if err != nil {
