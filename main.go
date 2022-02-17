@@ -51,6 +51,12 @@ func main() {
 		getJWT = strings.Replace(getJWT, "\r", "", -1)
 		fmt.Println("API Token used: ", getJWT)
 
+		fmt.Println("Konsolenausgaben zwecks Debugging aktivieren? (J/N)")
+		fmt.Print("-> ")
+		debuggingOutputs, _ := reader.ReadString('\n')
+		// clean console input from returns and newlines
+		debuggingOutputs = strings.Replace(debuggingOutputs, "\r\n", "", -1)
+
 		fmt.Println("Mit welchem JWT (Token API Admin) sollen Aufgaben geupdated werden?")
 		fmt.Print("-> ")
 		postJWT, _ := reader.ReadString('\n')
@@ -98,6 +104,10 @@ func main() {
 			continue
 		}
 
+		if debuggingOutputs == "J" {
+			fmt.Printf("Tasks received from Server: %v", string(responseBody))
+		}
+
 		var tasks []map[string]interface{}
 
 		err = json.Unmarshal(responseBody, &tasks)
@@ -119,8 +129,9 @@ func main() {
 				task[fieldToReplace] = newFieldValue
 			}
 		}
-
-		fmt.Printf("new tasks: %v\n", tasks)
+		if debuggingOutputs == "J" {
+			fmt.Printf("new tasks: %v\n", tasks)
+		}
 
 		//update tasks in factro
 		reqBody, err := json.Marshal(tasks)
@@ -138,10 +149,21 @@ func main() {
 		req.Header.Add("Authorization", postJWT)
 		req.Header.Add("Content-Type", "application/json")
 
-		_, err = client.Do(req)
+		response, err = client.Do(req)
 		if err != nil {
 			fmt.Println(err)
 			continue
+		}
+
+		defer response.Body.Close()
+		responseBody, err = io.ReadAll(response.Body)
+		if err != nil {
+			fmt.Println(err)
+			continue
+		}
+
+		if debuggingOutputs == "J" {
+			fmt.Printf("Server responded updating with: %v", string(responseBody))
 		}
 
 		fmt.Println("Tasks wurden erfolgreich aktualisiert! Ansicht in Factro aktualisieren und überprüfen.")
