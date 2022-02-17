@@ -1,3 +1,3 @@
-module github.com/lumaghg/factro-bot
+module github.com/lumaghg/factro-task-replacer
 
 go 1.17
