@@ -39,6 +39,7 @@ func main() {
 			return
 		}
 		filePath := path.Join(curDir, "config", "api_user_token.txt")
+		fmt.Println("Using filepath: ", filePath)
 		fileContent, err := ioutil.ReadFile(filePath)
 		if err != nil {
 			fmt.Println(err)
